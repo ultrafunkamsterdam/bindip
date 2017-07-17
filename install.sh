@@ -4,21 +4,21 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 
 # 
-# AFTER RUNNING THIS SETUP, YOU CAN BIND PROCESSES TO SPECIFIC IP
+#  AFTER RUNNING THIS SETUP, YOU CAN BIND PROCESSES TO SPECIFIC IP
 #
 #  Usage:
 #  
-#       LD_PRELOAD=/path/to/ipbind.so <command>
+#       LD_PRELOAD=/path/to/bindip.so <command>
 #	
 #	    eg:
 #	         	
 #       you can specify the address to use at runtime like so:
 #	    
-#       LD_PRELOAD=/home/yourname/ipbind.so BIND_SRC=123.123.123.123 curl whatismyip.akamai.com 
+#       LD_PRELOAD=/home/yourname/bindip.so BIND_SRC=123.123.123.123 curl whatismyip.akamai.com 
 #           
 #       or
 #
-#       LD_PRELOAD=/home/yourname/ipbind.so BIND_SRC=123.123.123.123 bash    (and in that session do whatever you like)
+#       LD_PRELOAD=/home/yourname/bindip.so BIND_SRC=123.123.123.123 bash (and in that session do whatever you like)
 #
 #       ofcourse you need to change the ip-address to a real public ip assigned to your machine
 #
@@ -35,7 +35,7 @@ cd ${GCC_FOLDER}
 sudo cp crtbeginT.o crtbeginT.orig.o
 sudo cp crtbeginS.o crtbeginT.o
 cd ${DIR}
-sudo gcc -fPIC -static --static -shared -o ipbind.so ipbind.c -lc -ldl
+sudo gcc -fPIC -static --static -shared -o bindip.so bindip.c -lc -ldl
 
 
 # RESTORE THE STUFF BACK TO ORIGINAL
