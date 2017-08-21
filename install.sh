@@ -23,20 +23,24 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #       ofcourse you need to change the ip-address to a real public ip assigned to your machine
 #
 
+
+## PRODECURE 1
 echo "First we try to compile the .so from .c without any modifications"
-gcc -fPIC -shared -o bindhack.so bindhack.c -lc -ldl
+gcc -fPIC -shared -o bindip.so bindip.c -lc -ldl
 if [ $? == 0 ]; then
 echo "You are lucky. It's built without modifying GCC"
 exit 0
 fi
 
-# GCC LIB (change if needed)
 
+
+## PROCEDURE 2 (IF 1 IS NOT WORKING)
+
+
+# GCC LIB (change if needed)
 GCC_FOLDER=/usr/lib/gcc/x86_64-linux-gnu/5.4.0
 
-
 # MAKE STUFF WORK
-
 cd ${GCC_FOLDER}
 sudo cp crtbeginT.o crtbeginT.orig.o
 sudo cp crtbeginS.o crtbeginT.o
@@ -45,7 +49,6 @@ sudo gcc -fPIC -static --static -shared -o bindip.so bindip.c -lc -ldl
 
 
 # RESTORE THE STUFF BACK TO ORIGINAL
-
 cd ${GCC_FOLDER}
 sudo cp crtbeginT.orig.o crtbeginT.o
 sudo rm crtbeginT.orig.o
