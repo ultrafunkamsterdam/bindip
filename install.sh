@@ -23,6 +23,12 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 #       ofcourse you need to change the ip-address to a real public ip assigned to your machine
 #
 
+echo "First we try to compile the .so from .c without any modifications"
+gcc -fPIC -shared -o bindhack.so bindhack.c -lc -ldl
+if [ $? == 0 ]; then
+echo "You are lucky. It's built without modifying GCC"
+exit 0
+fi
 
 # GCC LIB (change if needed)
 
